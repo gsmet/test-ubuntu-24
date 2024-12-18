@@ -26,4 +26,6 @@ jobs:
                 echo
                 echo
                 echo "DEBUG:"
-                if ! echo -n "${GIB_IMPACTED_MODULES}" | grep -qPv 'integration-tests/(devtools|gradle|maven|devmode|kubernetes/.*)|tcks/.*'; then run_jvm=false; fi
+                run_jvm=true
+                if ! (echo -n "${GIB_IMPACTED_MODULES}" | grep -qPv 'integration-tests/(devtools|gradle|maven|devmode|kubernetes/.*)|tcks/.*'); then run_jvm=false; fi
+                echo $run_jvm
