@@ -1,0 +1,23 @@
+name: Test
+
+on:
+    workflow_dispatch:
+
+defaults:
+    run:
+        shell: bash
+
+jobs:
+    test:
+        runs-on: ubuntu-24.04
+        name: Test
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+            - run: |
+                GIB_IMPACTED_MODULES=$(cat modules)
+                echo -n "${GIB_IMPACTED_MODULES}"
+
+                echo "### DEBUG:"
+                echo -n "${GIB_IMPACTED_MODULES}" | grep -Pv 'integration-tests/(devtools|gradle|maven|devmode|kubernetes/.*)|tcks/.*'
