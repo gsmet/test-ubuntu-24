@@ -19,5 +19,11 @@ jobs:
                 GIB_IMPACTED_MODULES=$(cat modules)
                 echo -n "${GIB_IMPACTED_MODULES}"
 
-                echo "### DEBUG:"
+                echo
+                echo
+                echo "DEBUG:"
                 echo -n "${GIB_IMPACTED_MODULES}" | grep -Pv 'integration-tests/(devtools|gradle|maven|devmode|kubernetes/.*)|tcks/.*'
+                echo
+                echo
+                echo "DEBUG:"
+                if ! echo -n "${GIB_IMPACTED_MODULES}" | grep -qPv 'integration-tests/(devtools|gradle|maven|devmode|kubernetes/.*)|tcks/.*'; then run_jvm=false; fi
